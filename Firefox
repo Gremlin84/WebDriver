@@ -1,0 +1,37 @@
+from selenium import webdriver
+
+driver = webdriver.Firefox(executable_path='C:\Python36\Drivers/geckodriver')
+
+# maksymalizacja okna
+driver.maximize_window()
+
+# ustawienie timeoutu dla ładowania strony
+driver.set_page_load_timeout(30)
+
+# otwarcie strony facebook
+driver.get("http://www.facebook.com")
+
+# czas na załadowanie wszystkich elementów strony
+driver.implicitly_wait(20)
+
+# wypisanie tytułu strony
+print(driver.title)
+
+# sprawdzenie czy tytuł strony zawiera słowo Facebook
+assert "Facebook" in driver.title
+
+# zapisanie screena
+driver.get_screenshot_as_file("./Screenshots/Facebook.png")
+
+# znalezienie pola i wpisanie tekstu
+driver.find_element_by_id("email").send_keys("SeleniumWebDriver")
+driver.find_element_by_name("pass").send_keys("Python")
+
+# kliknięcie przycisku
+driver.find_element_by_id("loginbutton").click()
+
+# zapisanie screena
+driver.get_screenshot_as_file("./Screenshots/Facebook1.png")
+
+# zamknięcie przeglądarki
+driver.quit()
